@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+        <style>
+            .carousel {
+            display: flex;
+            transition: transform 0.3s ease;
+            z-index: -1;
+            }
+
+            .carousel-item {
+            min-width: 100%;
+            }
+
+            /* Mengatur ukuran gambar dalam slide */
+            .carousel-item img {
+            width: 100%;
+            height: auto;
+            }
+
+            /* Mengatur tombol navigasi */
+            .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            transition: background 0.3s ease;
+            }
+
+            .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+            }
+
+            .carousel-button.left {
+            left: 0;
+            }
+
+            .carousel-button.right {
+            right: 0;
+            }
+
+            .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            }
+
+            .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            margin: 0 6px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: transparent;
+            }
+
+            .carousel-indicator.active {
+            background-color: #333;
+            }
+
+            @keyframes slide-up {
+            0% {
+                transform: translateY(15%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            }
+
+            .animate-slide-up {
+            animation: slide-up 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            .scroll-slide-up {
+                transform: translateY(25%);
+                opacity: 0;
+                transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+                }
+
+            .scroll-slide-up-active {
+                animation: slideUp 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+            }
+
+            @keyframes slideUp {
+                0% {
+                    transform: translateY(30%);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .scroll-slide-right {
+                transform: translateX(-25%);
+                opacity: 0;
+                transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            .scroll-slide-right-active {
+                animation: slideRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+            }
+
+            @keyframes slideRight {
+                0% {
+                    transform: translateX(-30%);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            .smooth-underline {
+                position: relative;
+                text-decoration: none;
+                color: #000; /* Ganti warna sesuai keinginan Anda */
+                transition: color 0.3s, padding 0.3s;
+            }
+
+            .smooth-underline:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 2px; /* Ketebalan garis bawah */
+                background-color: #3b82f6; /* Ganti warna sesuai keinginan Anda */
+                transform: scaleX(0);
+                transform-origin: 0 100%;
+                transition: transform 0.3s;
+            }
+
+            .smooth-underline:hover {
+                color: #0074d9; /* Ganti warna saat dihover sesuai keinginan Anda */
+            }
+
+            .smooth-underline:hover:after {
+                transform: scaleX(1);
+            }
+        </style>
+	</head>
+	<body>
+		<div class="container mx-auto">
+                <!-- Navbar -->
+                <section id="navbar" class="lg:fixed md:relative top-0 z-10 w-full bg-opacity-50 backdrop-filter backdrop-blur-md">
+                    <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
+                        <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+                            <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+                                <div class="flex flex-row items-center justify-between p-4">
+                                    <a href="#" ><img src="../assets/img/jdih_bpk.png" alt="Logo" class="w-40"></a>
+                                    <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+                                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                                            <path
+                                                x-show="!open"
+                                                fill-rule="evenodd"
+                                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                                clip-rule="evenodd"
+                                            ></path>
+                                            <path
+                                                x-show="open"
+                                                fill-rule="evenodd"
+                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+                                    <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                        <button
+                                            @click="open = !open"
+                                            class="flex flex-row text-gray-900 bg-white-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline relative z-20"
+                                        >
+                                            <span>Tentang</span>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                        <div
+                                            x-show="open"
+                                            x-transition:enter="transition ease-out duration-100"
+                                            x-transition:enter-start="transform opacity-0 scale-95"
+                                            x-transition:enter-end="transform opacity-100 scale-100"
+                                            x-transition:leave="transition ease-in duration-75"
+                                            x-transition:leave-start="transform opacity-100 scale-100"
+                                            x-transition:leave-end="transform opacity-0 scale-95"
+                                            class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-10"
+                                        >
+                                            <div class="px-2 pt-2 pb-4 lg:ml-0 md:ml-72 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-sitemap"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Struktur Organisasi</p>
+                                                            <p class="text-sm">Penjelasan Struktur Organisasi JDIH</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-regular fa-circle-question"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">FAQ</p>
+                                                            <p class="text-sm">Pertanyaan Lebih Lanjut</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-gavel"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Dasar Hukum</p>
+                                                            <p class="text-sm">Penjelasan Hukum & Pedoman</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-star"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Standar Layanan</p>
+                                                            <p class="text-sm">Sertifikat Standar Pelayanan JDIH</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-circle-info"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Tentang JDIH</p>
+                                                            <p class="text-sm">Apa itu JDIH?</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-location-dot fa-lg"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">UJDIH Perwakilan</p>
+                                                            <p class="text-sm">Perwakilan BPK RI</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-timeline"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Sejarah JDIH</p>
+                                                            <p class="text-sm">Sejarah dari JDIH</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                        <button
+                                            @click="open = !open"
+                                            class="flex flex-row text-gray-900 bg-white-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                        >
+                                            <span>Hukum</span>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                        <div
+                                            x-show="open"
+                                            x-transition:enter="transition ease-out duration-100"
+                                            x-transition:enter-start="transform opacity-0 scale-95"
+                                            x-transition:enter-end="transform opacity-100 scale-100"
+                                            x-transition:leave="transition ease-in duration-75"
+                                            x-transition:leave-start="transform opacity-100 scale-100"
+                                            x-transition:leave-end="transform opacity-0 scale-95"
+                                            class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-10"
+                                        >
+                                            <div class="px-2 pt-2 pb-4 lg:m-0 md:ml-72 bg-white rounded-md shadow-lg dark-mode:bg-gray-700 z-50">
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-file-lines"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Produk Hukum BPK</p>
+                                                            <p class="text-sm">Data Produk Hukum BPK</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-language"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Terjemahan</p>
+                                                            <p class="text-sm">Terjemahan UU ke dalam Bahasa Inggris</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-book-bookmark"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Putusan Pengadilan</p>
+                                                            <p class="text-sm">Data Keputusan dari Lembaga Peradilan</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-circle-nodes"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Rancangan Pembahasan UU</p>
+                                                            <p class="text-sm">Data Rancangan Pembahasan UU</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-book-bookmark"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Monografi Hukum</p>
+                                                            <p class="text-sm">Data Monografi Hukum</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-ellipsis"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Produk Hukum Lain</p>
+                                                            <p class="text-sm">...</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-book-open"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Artikel Hukum</p>
+                                                            <p class="text-sm">Data Artikel Hukum</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                        <button
+                                            @click="open = !open"
+                                            class="flex flex-row text-gray-900 bg-white-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                        >
+                                            <span>Informasi Hukum</span>
+                                            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                        <div
+                                            x-show="open"
+                                            x-transition:enter="transition ease-out duration-100"
+                                            x-transition:enter-start="transform opacity-0 scale-95"
+                                            x-transition:enter-end="transform opacity-100 scale-100"
+                                            x-transition:leave="transition ease-in duration-75"
+                                            x-transition:leave-start="transform opacity-100 scale-100"
+                                            x-transition:leave-end="transform opacity-0 scale-95"
+                                            class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right"
+                                        >
+                                            <div class="px-2 pt-2 pb-4 lg:m-0 md:ml-52 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-file-lines"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Tulisan Hukum</p>
+                                                            <p class="text-sm">Data Tulisan Hukum</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-square-poll-vertical"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Infografis</p>
+                                                            <p class="text-sm">Data Infografis</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-newspaper"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Catatan Berita</p>
+                                                            <p class="text-sm">Data Catatan Berita</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-list-ol"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Glosarium</p>
+                                                            <p class="text-sm">Data Glosarium</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-calculator"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Matriks Perbandingan</p>
+                                                            <p class="text-sm">Data Matriks Perbandingan</p>
+                                                        </div>
+                                                    </a>
+    
+                                                    <a
+                                                        class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                        href="#"
+                                                    >
+                                                        <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                            <i class="fa-solid fa-chart-pie"></i>
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="font-semibold">Statistik Produk Hukum</p>
+                                                            <p class="text-sm">Grafik Statistik Produk Hukum</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Berita</a>    
+                                </nav>
+                            </div>
+                        </div>
+                    </div>       
+                </section>
+                <!-- /Navbar -->
+            </div>
+
+            <!-- Banner -->
+            <section id="welcome-banner" class="bg-blue-50 lg:px-32 pt-32 pb-16">
+                <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-3 gap-4 animate-slide-up">
+                    <div class="col-span-2">
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl text-start font-semibold antialiased tracking-normal mt-16" style="font-family: 'Jost', sans-serif;">
+                            Jaringan Dokumentasi dan <br>
+                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500">
+                                Informasi Hukum BPK
+                            </span>
+                        </h3>
+                        <p class="mt-8" style="font-family: 'Jost', sans-serif;">Pencarian dokumentasi dan informasi hukum di lingkungan Badan Pemeriksa Keuangan</p>
+                        <div class="job-search-form bg-white rounded-lg max-w-2xl">
+                            <form class="lg:flex lg:items-center mt-10 p-3">
+                                <div class="w-full lg:w-5/12 lg:pr-4 mb-4 lg:mb-0">
+                                    <div class="relative">
+                                        <i class="fa-solid fa-magnifying-glass absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text" placeholder="Kata kunci pencarian..." class="w-full bg-white-100 border-none rounded-md py-2 pl-10 focus:outline-none focus:border-none" style="font-family: 'Jost', sans-serif;">
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-3/12 lg:pr-4 mb-4 lg:mb-0" style="font-family: 'Jost', sans-serif;">
+                                    <select class="w-full bg-white-100 border-none rounded-md py-2 pl-2 pr-8 focus:outline-none focus:border-none">
+                                        <option value="">Semua Jenis</option>
+                                        <option value="1">Peraturan Perundang-undangan</option>
+                                        <option value="2">Monografi Hukum</option>
+                                        <option value="3">Artikel Hukum</option>
+                                        <option value="4">Putusan Pengadilan</option>
+                                        <option value="5">Informasi Hukum</option>
+                                    </select>
+                                </div>
+                                <div class="w-full lg:w-2/12 lg:pr-4 mb-4 lg:mb-0">
+                                    <button type="submit" class="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600" style="font-family: 'Jost', sans-serif;">Cari</button>
+                                </div>
+                                <div class="w-full lg:w-2/12">
+                                    <a class="me-1 text-red-500" data-bs-toggle="collapse" data-bs-target="#collapsePencarianDetail" href="#" role="button" style="font-family: 'Jost', sans-serif;">
+                                        Advanced Search
+                                    </a>
+                                </div>
+                            </form>
+                        </div>   
+                        <p class="mt-8" style="font-family: 'Jost', sans-serif;"><span class="text-red-500 italic">#</span> Pencarian peraturan selain produk hukum BPK silahkan akses <a href="#"><span class="font-black text-red-600">Database Peraturan BPK</span></a></p> 
+                        <div class="mt-4 max-w-2xl">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
+                                <!-- Item 1 -->
+                                <div class="category-block col-span-1 sm:col-span-1 md:col-span-1">
+                                    <div class="inner-box p-1 text-start bg-blue-100 hover:bg-blue-300 duration-300 rounded-lg">
+                                        <a href="" target="_self">
+                                            <img src="../assets/img/layanan_jdih.png" alt="Image 1">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="category-block col-span-1 sm:col-span-1 md:col-span-1">
+                                    <div class="inner-box p-1 text-start bg-blue-100 hover:bg-blue-300 duration-300 rounded-lg">
+                                        <a target="_self" href="">
+                                            <img src="../assets/img/survei_pengunjung.png" alt="Image 2">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Item 3 -->
+                                <div class="category-block col-span-1 sm:col-span-1 md:col-span-1">
+                                    <div class="inner-box p-1 text-start bg-blue-100 hover:bg-blue-300 duration-300 rounded-lg">
+                                        <a target="_self" href="">
+                                            <img src="../assets/img/uji_publik_rancangan.png" alt="Image 3">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>  
+                    <div class="col-span-1 hidden md:block">
+                        <div class="relative w-full md:w-auto">
+                            <div class="overflow-hidden rounded-lg">
+                                <div class="carousel">
+                                    <!-- Slide 1 -->
+                                    <div class="carousel-item">
+                                        <img src="../assets/img/library.jpg" alt="Slide 1" class="w-full h-auto">
+                                    </div>
+                                    <!-- Slide 2 -->
+                                    <div class="carousel-item">
+                                        <img src="../assets/img/pen.jpg" alt="Slide 2" class="w-full h-auto">
+                                    </div>
+                                    <!-- Slide 3 -->
+                                    <div class="carousel-item">
+                                        <img src="../assets/img/paper.jpg" alt="Slide 3" class="w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-button left" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" style="color: #ffffff;"></i></button>
+                            <button button class="carousel-button right" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
+
+                            <div class="carousel-indicators">
+                                <button class="carousel-indicator" onclick="goToSlide(0)"></button>
+                                <button class="carousel-indicator" onclick="goToSlide(1)"></button>
+                                <button class="carousel-indicator" onclick="goToSlide(2)"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Banner -->
+
+            <!-- Feature -->
+            <section id="fitur">
+                <div class="container mx-auto px-8 sm:px-4 md:px-16 lg:px-36 mt-24 mb-24">
+                    <h2 class="text-3xl text-center font-semibold antialiased tracking-normal mb-5" style="font-family: 'Jost', sans-serif;">
+                        Fitur-Fitur JDIH BPK
+                    </h2>
+                    <p class="text-center font-normal antialiased tracking-normal mt-2 md:mt-5" style="font-family: 'Jost', sans-serif;">Ragam fitur yang tersedia pada web JDIH BPK</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-20 scroll-slide-up" style="font-family: 'Jost', sans-serif;">
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-file-lines fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Peraturan Perundang-undangan</a></h4>
+                                        <p class="text-gray-600">44 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-book-bookmark fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Monografi Hukum</a></h4>
+                                        <p class="text-gray-600">72 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-book-open fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Artikel Hukum</a></h4>
+                                        <p class="text-gray-600">11 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-book-bookmark fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Putusan Pengadilan</a></h4>
+                                        <p class="text-gray-600">7 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-file-lines fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Tulisan Hukum</a></h4>
+                                        <p class="text-gray-600">99 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-newspaper fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Catatan Berita</a></h4>
+                                        <p class="text-gray-600">89 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-calculator fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Matriks Perbandingan</a></h4>
+                                        <p class="text-gray-600">24 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-square-poll-vertical fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Infografis</a></h4>
+                                        <p class="text-gray-600">1 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-list-ol fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Glosarium</a></h4>
+                                        <p class="text-gray-600">1771 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-language fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Terjemahan Peraturan</a></h4>
+                                        <p class="text-gray-600">17 data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-building-columns fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">UU Keuangan Negara</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-block col-lg-3 col-md-6 col-sm-12 group hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r from-blue-700 to-cyan-500 hover:drop-shadow-md duration-300 mb-4">
+                            <div class="inner-box p-4 border border-gray-200 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-200 group-hover:bg-blue-500 duration-300 rounded-lg">
+                                        <i class="fa-solid fa-database fa-2x text-black group-hover:text-white group-hover:drop-shadow-md duration-300"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-xl font-semibold"><a href="#" class="">Database Peraturan</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Feature -->
+
+            <!-- Product -->
+            <section id="produk_hukum" class="lg:px-32 pt-32 pb-16" style="background-color: #F0F5F7;">
+                <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24">
+                    <h2 class="text-3xl text-center font-semibold antialiased tracking-normal mb-5" style="font-family: 'Jost', sans-serif;">
+                        Produk Hukum Terbaru
+                    </h2>
+                    <p class="text-center font-normal antialiased tracking-normal mt-2 md:mt-5" style="font-family: 'Jost', sans-serif;">Produk hukum terkini dari BPK</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12 mt-20 text-justify scroll-slide-up">
+                        <div class="job-block bg-white rounded-lg p-5 group hover:text-red-500 hover:drop-shadow-2xl duration-300 hover:scale-110">
+                            <div class="inner-box">
+                                <div class="content flex items-start">
+                                    <span class="company-logo mt-2 text-danger text-2xl">
+                                        <i class="fa-regular fa-file-lines fa-2x"></i>
+                                    </span>
+                                    <div class="ml-3">
+                                        <p>Peraturan Badan Pemeriksa Keuangan Nomor 4 Tahun 2023</p>
+                                        <h4 class="text-lg font-semibold text:bg-black group-hover:text-blue-600 duration-300">
+                                            <a href="#">Tata Cara Pemilihan Ketua dan/atau Wakil Ketua Badan Pemeriksa Keuangan</a>
+                                        </h4>
+                                        <ul class="job-info mt-4">
+                                            <li class="group:hover">
+                                                <i class="fa-regular fa-bookmark"></i> HUKUM ADMINISTRASI NEGARA
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block bg-white rounded-lg p-5 group hover:text-red-500 hover:drop-shadow-2xl duration-300 hover:scale-110">
+                            <div class="inner-box">
+                                <div class="content flex items-start">
+                                    <span class="company-logo mt-2 text-danger text-2xl">
+                                        <i class="fa-regular fa-file-lines fa-2x"></i>
+                                    </span>
+                                    <div class="ml-3">
+                                        <p>Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2023</p>
+                                        <h4 class="text-lg font-semibold group-hover:text-blue-600 duration-300">
+                                            <a href="#">Besaran, Persyaratan, dan Tata Cara Pengenaan Tarif Penerimaan Negara Bukan Pajak sampai dengan Rp0,00 (Nol Rupiah) atau 0% (Nol Persen) yang Berlaku pada Badan Pemeriksa Keuangan</a>
+                                        </h4>
+                                        <ul class="job-info mt-4">
+                                            <li class="text-danger">
+                                                <i class="fa-regular fa-bookmark"></i> HUKUM ADMINISTRASI NEGARA
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block bg-white rounded-lg p-5 group hover:text-red-500 hover:drop-shadow-2xl duration-300 hover:scale-110">
+                            <div class="inner-box">
+                                <div class="content flex items-start">
+                                    <span class="company-logo mt-2 text-danger text-2xl">
+                                        <i class="fa-regular fa-file-lines fa-2x"></i>
+                                    </span>
+                                    <div class="ml-3">
+                                        <p>Peraturan Badan Pemeriksa Keuangan Nomor 1 Tahun 2023</p>
+                                        <h4 class="text-lg font-semibold group-hover:text-blue-600 duration-300">
+                                            <a href="#">Perubahan Ketiga atas Peraturan Badan Pemeriksa Keuangan Nomor 1 Tahun 2019 tentang Organisasi dan Tata Kerja Pelaksana Badan Pemeriksa Keuangan</a>
+                                        </h4>
+                                        <ul class="job-info mt-4">
+                                            <li class="text-danger">
+                                                <i class="fa-regular fa-bookmark"></i> HUKUM ADMINISTRASI NEGARA
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block bg-white rounded-lg p-5 group hover:text-red-500 hover:drop-shadow-2xl duration-300 hover:scale-110">
+                            <div class="inner-box">
+                                <div class="content flex items-start">
+                                    <span class="company-logo mt-2 text-danger text-2xl">
+                                        <i class="fa-regular fa-file-lines fa-2x"></i>
+                                    </span>
+                                    <div class="ml-3">
+                                        <p>Peraturan Badan Pemeriksa Keuangan Nomor 3 Tahun 2022</p>
+                                        <h4 class="text-lg font-semibold group-hover:text-blue-600 duration-300">
+                                            <a href="#">Pemeriksaan Keuangan Negara oleh Pemeriksa dan/atau Tenaga Ahli dari Luar Badan Pemeriksa Keuangan dan Akuntan Publik Berdasarkan Ketentuan Peraturan Perundang-undangan</a>
+                                        </h4>
+                                        <ul class="job-info mt-4">
+                                            <li class="text-danger">
+                                                <i class="fa-regular fa-bookmark"></i> HUKUM ADMINISTRASI NEGARA
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mt-10 scroll-slide-up">
+                        <button type="button" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-medium py-2 px-4 rounded-lg" style="font-family: 'Jost', sans-serif;">Lihat Peraturan Lainnya</button>
+                    </div>
+                </div>
+            </section>
+            <!-- /Product -->
+
+            <!-- Database -->
+            <section id="database" class="bg-white lg:px-32 pt-32 pb-16">
+                <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24" style="font-family: 'Jost', sans-serif;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Content Column -->
+                        <div class="order-2 md:order-1 scroll-slide-up">
+                            <div class="sec-title">
+                                <h1 class="text-5xl font-semibold">Database Peraturan</h1>
+                                <div class="text text-justify mt-5 mb-5 leading-loose">Bagian dari pelaksanaan JDIH di lingkungan BPK yang secara khusus dimaksudkan untuk menyebarluaskan informasi peraturan perundang-undangan dan dokumentasi hukum secara mudah, cepat dan akurat kepada pengguna di internal BPK maupun masyarakat.</div>
+                            </div>
+                            <a href="#" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white py-2 px-4 rounded-lg inline-flex items-center" target="_blank">
+                                <span class="btn-title mr-2"><i class="fa-solid fa-magnifying-glass"></i> Cari Peraturan</span>
+                            </a>
+                        </div>
+                    
+                        <!-- Image Column -->
+                        <div class="block scroll-slide-right">
+                            <figure class="border p-2">
+                                <img src="../assets/img/database_2023.jpg" alt="" class="w-full">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Database -->
+
+            <!-- News -->
+            <section id="berita" class="bg-slate-200 lg:px-32 pt-32 pb-32" style="font-family: 'Jost', sans-serif;">
+                <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24">
+                    <h2 class="text-3xl text-center font-semibold antialiased tracking-normal mb-5">
+                        Berita Terbaru
+                    </h2>
+                    <p class="text-center font-normal antialiased tracking-normal mt-2 md:mt-5" style="font-family: 'Jost', sans-serif;">Berita terkait aktivitas JDIH BPK</p>
+                </div>
+                <div class="container mx-auto scroll-slide-up">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="news-block bg-white rounded-lg p-4 hover:scale-110 hover:drop-shadow-2xl duration-300">
+                            <div class="inner-box">
+                                <div class="image-box relative overflow-hidden">
+                                    <img src="../assets/img/inovasi.jpeg" alt="" class="rounded-lg transition-transform duration-300 transform scale-100 hover:scale-105">
+                                </div>
+                                <div class="lower-content mt-3">
+                                    <ul class="post-meta">
+                                        <li>05/07/2023</li>
+                                    </ul>
+                                    <h3 class="text-lg text-justify font-semibold mt-5 hover:text-blue-600 duration-300"><a href="#">Empat Inovasi Diluncurkan dalam Kegiatan Workshop JDIH BPK Tahun 2023</a></h3>
+                                    <p class="text text-justify mt-2">Optimalisasi layanan pengelolaan dokumentasi dan informasi hukum oleh Jaringan Dokumentasi dan Informasi Hukum (JDIH) BPK di era digital terus ditingkatkan. Bertempat di Auditorium Badan Pendidikan dan Pelatihan Pemeriksaan Keuangan Negara (Badiklat PKN) BPK pada tanggal 4 Juli 2023, Direktorat Utama Pembinaan dan Pengembangan Hukum Pemeriksaan Keuangan Negara (Ditama Binbangkum) menyelenggarakan Workshop JDIH BPK Tahun 2023.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-block bg-white rounded-lg p-4 hover:scale-110 hover:drop-shadow-2xl duration-300">
+                            <div class="inner-box">
+                                <div class="image-box relative overflow-hidden">
+                                    <img src="../assets/img/workshop.jpeg" alt="" class="rounded-lg transition-transform duration-300 transform scale-100 hover:scale-105">
+                                </div>
+                                <div class="lower-content mt-3">
+                                    <ul class="post-meta">
+                                        <li>04/07/2023</li>
+                                    </ul>
+                                    <h3 class="text-lg text-justify font-semibold mt-5 hover:text-blue-600 duration-300"><a href="#">JDIH BPK Menyelenggarakan Workshop JDIH BPK Tahun 2023</a></h3>
+                                    <p class="text text-justify mt-2">Upaya peningkatan layanan dokumentasi dan informasi hukum oleh Jaringan Dokumentasi dan Informasi Hukum (JDIH) di lingkungan BPK dilakukan melalui beberapa cara, salah satunya melalui workshop yang diikuti oleh pengelola JDIH BPK. Bertempat di Badan Pendidikan dan Pelatihan Pemeriksaan Keuangan Negara (Badiklat PKN) BPK pada tanggal 4 Juli 2023, Direktorat Utama Pembinaan dan Pengembangan Hukum Pemeriksaan Keuangan Negara (Ditama Binbangkum) menyelenggarakan Workshop JDIH BPK Tahun 2023.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-block bg-white rounded-lg p-4 hover:scale-110 hover:drop-shadow-2xl duration-300">
+                            <div class="inner-box">
+                                <div class="image-box relative overflow-hidden">
+                                    <img src="../assets/img/dpr.jpeg" alt="" class="rounded-lg transition-transform duration-300 transform scale-100 hover:scale-105">
+                                </div>
+                                <ul class="post-meta">
+                                    <li>03/07/2023</li>
+                                </ul>
+                                <h3 class="text-lg text-justify font-semibold mt-5 hover:text-blue-600 duration-300"><a href="#">Dewan Perwakilan Rakyat Menetapkan Undang-Undang Nomor 6 Tahun 2023 tentang Penetapan Peraturan Pemerintah Pengganti Undang-Undang Nomor 2 Tahun 2022 tentang Cipta Kerja</a></h3>
+                                <p class="text text-justify mt-2">Dewan Perwakilan Rakyat (DPR) menetapkan Undang-Undang Nomor 6 Tahun 2023 tentang Penetapan Peraturan Pemerintah Pengganti Undang-Undang Nomor 2 Tahun 2022 tentang Cipta Kerja pada tanggal 31 Maret 2023. Undang-Undang Nomor 6 Tahun 2023 tersebut telah diundangkan dalam Lembaran Negara Tahun 2023 Nomor 41 pada tanggal 31 Maret 2023.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            <!-- /News -->
+
+            <!-- Statistics -->
+            <section id="statistik" class="bg-white lg:px-32 pt-32 pb-16">
+                <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24">
+                    <h1 class="text-5xl text-center font-semibold antialiased tracking-normal mb-5">Statistik Pengunjung</h1>
+                    <p class="text-center text-red-600 font-normal antialiased tracking-normal mt-2 md:mt-5" style="font-family: 'Jost', sans-serif;">Update data terakhir pada 11/10/2023</p>
+                </div>
+                <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 scroll-slide-up">
+                    <!--Column-->
+                    <div class="counter-column bg-white rounded-lg p-4 text-center shadow-md border-4 hover:text-white transition-colors duration-300 hover:bg-gradient-to-r from-blue-700 to-cyan-500">
+                        <div class="count-box counted text-4xl font-semibold"><span class="count-text">40</span>k</div>
+                        <h4 class="counter-title text-lg mt-4">Pengunjung setahun terakhir</h4>
+                    </div>
+            
+                    <!--Column-->
+                    <div class="counter-column bg-white rounded-lg p-4 text-center shadow-md border-4 hover:text-white transition-colors duration-300 hover:bg-gradient-to-r from-blue-700 to-cyan-500">
+                        <div class="count-box counted text-4xl font-semibold"><span class="count-text">7</span>k</div>
+                        <h4 class="counter-title text-lg mt-4">Pengunjung sebulan terakhir</h4>
+                    </div>
+            
+                    <!--Column-->
+                    <div class="counter-column bg-white rounded-lg p-4 text-center shadow-md border-4 hover:text-white transition-colors duration-300 hover:bg-gradient-to-r from-blue-700 to-cyan-500">
+                        <div class="count-box counted text-4xl font-semibold"><span class="count-text">176</span></div>
+                        <h4 class="counter-title text-lg mt-4">Pengunjung kemarin</h4>
+                    </div>
+                </div>
+            </section>
+            <!-- /Statistics -->
+
+            <!-- Survey -->
+            <section id="survei" class="lg:px-44 pt-32 pb-16" style="background-color: #ecedf2; font-family: 'Jost', sans-serif;">
+                <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24" style="font-family: 'Jost', sans-serif;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Content Column -->
+                        <div class="order-2 md:order-1 scroll-slide-up">
+                            <div class="sec-title">
+                                <h1 class="text-5xl font-semibold">Survei Pengunjung</h1>
+                                <div class="text text-justify mt-5 mb-5 leading-loose">Penilaian pengunjung atas layanan website ini.</div>
+                            </div>
+                            <a href="#" class="bg-blue-500 hover:bg-blue-700 duration-300 text-white py-2 px-4 rounded-lg inline-flex items-center" target="_blank">
+                                <span class="btn-title mr-2"><i class="fa-solid fa-square-poll-vertical"></i> Isi Survei</span>
+                            </a>
+                        </div>
+                    
+                        <!-- Image Column -->
+                        <div class="block scroll-slide-right">
+                            <figure class="border-2 bg-slate-200 p-2">
+                                <img src="../assets/img/survei.jpg" alt="" class="w-full">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Survey -->
+
+            <!-- Footer -->
+            <section id="footer" class="bg-slate-200" style="font-family: 'Jost', sans-serif;">
+                <footer class="text-black scroll-slide-up">
+                    <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-44 pt-20 pb-10">
+                        <!-- Widgets Section -->
+                        <div class="md:flex md:gap-8">
+                            <!-- About Widget -->
+                            <div class="md:w-1/2 p-6">
+                                <div class="logo mb-6">
+                                    <a href="#">
+                                        <img src="../assets/img/jdih_bpk.png" alt="Logo">
+                                    </a>
+                                </div>
+                                <h1 class="text-2xl font-bold">Hubungi Kami <br><span class="text-blue-500">Sekretariat Website JDIH BPK</span></h1>
+                                <p class="leading-loose mt-5">
+                                    Direktorat Utama Pembinaan dan Pengembangan Hukum Pemeriksaan Keuangan Negara
+                                    <br>Badan Pemeriksa Keuangan Republik Indonesia
+                                    <br>Jalan Jenderal Gatot Subroto 31 Jakarta Pusat 10210
+                                    <br>Telp. (021) 25549000 ext. 1521
+                                </p>
+                            </div>
+                
+                            <!-- Links and About Us Widgets -->
+                            <div class="md:w-1/2">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Links Widget -->
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-4">Tautan</h4>
+                                        <ul class="leading-loose">
+                                            <li class="smooth-underline">
+                                                <a href="https://www.bpk.go.id/" title="Situs Resmi BPK-RI" target="_blank">Website Resmi BPK</a>
+                                            </li>
+                                            <li class="smooth-underline">
+                                                <a href="https://peraturan.bpk.go.id/" title="Database Peraturan BPK-RI" target="_blank">Database Peraturan BPK</a>
+                                            </li>
+                                            <li class="smooth-underline">
+                                                <a href="https://jdihn.go.id/" title="Situs utama BPK-RI" target="_blank">Portal JDIH Nasional</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                
+                                    <!-- About Us Widget -->
+                                    <div>
+                                        <h4 class="text-lg font-semibold mb-4">Tentang Kami</h4>
+                                        <ul class="leading-loose">
+                                            <li class="smooth-underline"><a href="#">Struktur Organisasi</a></li>
+                                            <li class="smooth-underline"><a href="#">Dasar Hukum</a></li>
+                                            <li class="smooth-underline"><a href="#">Tentang JDIH</a></li>
+                                            <li class="smooth-underline"><a href="#">Sejarah JDIH</a></li>
+                                            <li class="smooth-underline"><a href="#">F. A. Q.</a></li>
+                                            <li class="smooth-underline"><a href="#">Standar Layanan</a></li>
+                                            <li class="smooth-underline"><a href="#">UJDIH Perwakilan</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fixed bottom-10 right-6 z-10">
+                        <a href="#welcome-banner" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded-full shadow-lg" >
+                            <span class="fa fa-angle-up"></span>
+                        </a>
+                    </div>
+                
+                    <!-- Bottom -->
+                    <div class="bg-white py-4">
+                        <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-44">
+                            <div class="flex flex-col md:flex-row justify-between items-center">
+                                <div class="copyright-text text-gray-600 mb-4 md:mb-0">&copy; 2023 BPK RI. All Right Reserved.</div>
+                                <div class="space-x-6">
+                                    <a href="#"><i class="fab fa-facebook-f hover:text-blue-500 duration-300"></i></a>
+                                    <a href="#"><i class="fab fa-x-twitter hover:text-blue-500 duration-300"></i></a>
+                                    <a href="#"><i class="fab fa-instagram hover:text-blue-500 duration-300"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in hover:text-blue-500 duration-300"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+            <!-- /Footer -->
+            
+		<!-- Components -->
+		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script>
+            let currentIndex = 0;
+            const totalSlides = document.querySelectorAll('.carousel-item').length;
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            let autoSlideInterval;
+
+            // Fungsi untuk memulai interval slide otomatis
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    nextSlide();
+                }, 10000); // 10 detik
+            }
+
+            // Fungsi untuk menghentikan interval slide otomatis
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Membuat indikator slide pertama sebagai aktif saat halaman dimuat
+            updateIndicators();
+
+            // Mulai interval slide otomatis
+            startAutoSlide();
+
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+                updateIndicators();
+                stopAutoSlide(); // Menghentikan interval saat pengguna melakukan perpindahan manual
+                startAutoSlide();
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalSlides - 1; // Kembali ke slide terakhir jika di slide pertama
+                }
+                updateCarousel();
+                updateIndicators();
+                stopAutoSlide();
+                startAutoSlide();
+            }
+
+            function nextSlide() {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; // Kembali ke slide pertama jika di slide terakhir
+                }
+                updateCarousel();
+                updateIndicators();
+                stopAutoSlide();
+                startAutoSlide();
+            }
+
+            function updateCarousel() {
+                const translateValue = currentIndex * -100;
+                document.querySelector('.carousel').style.transform = `translateX(${translateValue}%)`;
+            }
+
+            function updateIndicators() {
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+
+            // Membuat indikator slide pertama sebagai aktif saat halaman dimuat
+            updateIndicators();
+        </script>
+        <script>
+            const elementsUp = document.querySelectorAll('.scroll-slide-up');
+            const elementsRight = document.querySelectorAll('.scroll-slide-right');
+
+            const observerUp = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-slide-up-active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            const observerRight = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-slide-right-active');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            });
+
+            elementsUp.forEach((element) => {
+                observerUp.observe(element);
+            });
+
+            elementsRight.forEach((element) => {
+                observerRight.observe(element);
+            });
+        </script>
+	</body>
+</html>
