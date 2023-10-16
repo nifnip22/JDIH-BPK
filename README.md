@@ -16,6 +16,8 @@ Anda dapat mengakses website resmi JDIH BPK melalui tautan berikut:
 
 ## Penggunaan Tailwind CSS
 
+![Tailwind CSS](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tailwind_CSS_logo.svg/2560px-Tailwind_CSS_logo.svg.png)
+
 Proyek ini menggunakan framework CSS yang populer yaitu Tailwind CSS. Tailwind CSS adalah alat yang kuat untuk mempercepat pengembangan tampilan web dengan pendekatan utility-first. Dengan menggunakan Tailwind CSS, kita dapat dengan cepat membuat tata letak dan komponen tampilan yang menarik dan responsif.
 
 ### Contoh Penggunaan Tailwind CSS
