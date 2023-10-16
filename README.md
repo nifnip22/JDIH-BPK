@@ -2,7 +2,7 @@
 
 ![JDIH BPK](assets/img/jdih_bpk.png)
 
-Proyek ini merupakan replikasi dari Website Jaringan Dokumentasi dan Informasi Hukum (JDIH) Badan Pemeriksa Keuangan (BPK) Indonesia. Proyek ini dibuat sebagai bagian dari Tugas Praktek Kerja Lapangan (PKL) sebagai mahasiswa jurusan RPL.
+Proyek ini merupakan replikasi dari Website Jaringan Dokumentasi dan Informasi Hukum (JDIH) Badan Pemeriksa Keuangan (BPK) Indonesia. Proyek ini dibuat sebagai bagian dari Tugas Praktek Kerja Lapangan (PKL) sebagai siswa SMK jurusan RPL.
 
 ## Deskripsi Proyek
 
