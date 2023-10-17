@@ -489,51 +489,20 @@
                     </h3>
                     <div class="job-search-form bg-white rounded-lg max-w-3xl drop-shadow-2xl">
                         <form class="lg:flex lg:items-center mt-10 p-6">
-                            <div class="w-full lg:w-5/12 lg:pr-4 mb-4 lg:mb-0">
+                            <div class="w-full lg:w-5/12 lg:pr-4 mb-4 lg:mb-0" style="font-family: 'Jost', sans-serif;">
+                                <select class="w-full bg-white-100 border-none rounded-md py-2 pl-2 pr-8 focus:outline-none focus:border-none">
+                                    <option value="">- Pilih Kategori</option>
+                                    <option value="1" selected>Tulisan Hukum</option>
+                                    <option value="2">Catatan Berita</option>
+                                    <option value="3">Matriks Perbandingan</option>
+                                    <option value="4">Infografis</option>
+                                </select>
+                            </div>
+                            <div class="w-full lg:w-6/12 lg:pr-4 mb-4 lg:mb-0">
                                 <div class="relative">
                                     <i class="fa-solid fa-magnifying-glass absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400"></i>
                                     <input type="text" placeholder="Kata kunci pencarian..." class="w-full bg-white-100 border-none rounded-md py-2 pl-10 focus:outline-none focus:border-none" style="font-family: 'Jost', sans-serif;">
                                 </div>
-                            </div>
-                            <div class="w-full lg:w-3/12 lg:pr-4 mb-4 lg:mb-0" style="font-family: 'Jost', sans-serif;">
-                                <select class="w-full bg-white-100 border-none rounded-md py-2 pl-2 pr-8 focus:outline-none focus:border-none">
-                                    <option value="">Pilih Jenis Dokumen</option>
-                                    <option value="1">Peraturan Perundang-undangan</option>
-                                    <option value="2">Monografi Hukum</option>
-                                    <option value="3" selected>Artikel Hukum</option>
-                                    <option value="4">Putusan Pengadilan</option>
-                                    <option value="5">Informasi Hukum</option>
-                                </select>
-                            </div>
-                            <div class="w-full lg:w-3/12 lg:pr-4 mb-4 lg:mb-0" style="font-family: 'Jost', sans-serif;">
-                                <select class="w-full bg-white-100 border-none rounded-md py-2 pl-2 pr-8 focus:outline-none focus:border-none">
-                                    <option value="">Pilih Tahun</option>
-                                    <option value="1">2023</option>
-                                    <option value="2">2022</option>
-                                    <option value="3">2021</option>
-                                    <option value="4">2020</option>
-                                    <option value="5">2019</option>
-                                </select>
-                            </div>
-                            <div class="w-full lg:w-3/12 lg:pr-4 mb-4 lg:mb-0" style="font-family: 'Jost', sans-serif;">
-                                <select class="w-full bg-white-100 border-none rounded-md py-2 pl-2 pr-8 focus:outline-none focus:border-none">
-                                    <option value="">Pilih Bidang Hukum</option>
-                                    <option value="1">Hukum Umat</option>
-                                    <option value="2">Hukum Adat</option>
-                                    <option value="3">Hukum Administrasi Negara</option>
-                                    <option value="4">Hukum Agraria</option>
-                                    <option value="5">Hukum Dagang</option>
-                                    <option value="6">Hukum Islam</option>
-                                    <option value="7">Hukum Internasional</option>
-                                    <option value="8">Hukum Lingkungan</option>
-                                    <option value="9">Hukum Pemburuhan</option>
-                                    <option value="10">Hukum Perdata</option>
-                                    <option value="11">Hukum Pidana</option>
-                                    <option value="12">Hukum Tata Negara</option>
-                                    <option value="13">Himpunan Peraturan</option>
-                                    <option value="14">Putusan Pengadilan</option>
-                                    <option value="15">Referensi</option>
-                                </select>
                             </div>
                             <div class="w-full lg:w-2/12 lg:pr-4 mb-4 lg:mb-0">
                                 <button type="submit" class="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600" style="font-family: 'Jost', sans-serif;">Cari</button>
@@ -548,93 +517,339 @@
         <section id="data" class="lg:px-32 pt-32 pb-16">
             <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24">
                 <div class="grid grid-cols-1 gap-4">
-                    <h2>Menampilkan <b>11</b> Data</h2>
-                    <div class="job-block-two mb-5 hover:drop-shadow-2xl duration-300 scroll-slide-up">
+                    <h2>Menampilkan <b>99</b> Data</h2>
+                    <div class="job-block-two mb-5 scroll-slide-up">
                         <div class="inner-box bg-white p-4 rounded-lg border-2">
                             <div class="content flex flex-col md:flex-row items-start">
-                                <span class="company-logo mt-5 ml-3 text-secondary text-4xl">
-                                    <i class="fa-solid fa-book-open"></i>
+                                <span class=" mt-3 ml-3 p-1 text-secondary text-sm rounded-md" style="background-color: red;">
+                                    <p class="font-bold text-white">Disclaimer</p>
                                 </span>
-                                <div class="ml-3">
-                                    <p class="mb-2">Warta Pemeriksa BPK Edisi 1 Vol. VI - Januari 2023</p>
-                                    <h1><a href="artikel/1-artikel.html" class="text-black hover:text-red-500 duration-300 font-bold text-2xl">Mengenal Aturan Baru Jabatan Fungsional</a></h1>
-                                    <ul class="job-info mt-3 flex flex-col md:flex-row">
-                                        <li class="text-blue-500 mr-2"><i class="fa-solid fa-tag"></i> Artikel Hukum</li>
-                                        <li class="text-blue-500 mr-2"><i class="fa-regular fa-folder-open"></i> HUKUM ADMINISTRASI NEGARA</li>
-                                    </ul>                                    
-                                </div>
-                            </div>
-                        </div>                                              
-                    </div>
-                    <div class="job-block-two mb-5 hover:drop-shadow-2xl duration-300 scroll-slide-up">
-                        <div class="inner-box bg-white p-4 rounded-lg border-2">
-                            <div class="content flex flex-col md:flex-row items-start">
-                                <span class="company-logo mt-5 ml-3 text-secondary text-4xl">
-                                    <i class="fa-solid fa-book-open"></i>
-                                </span>
-                                <div class="ml-3">
-                                    <p class="mb-2">Warta Pemeriksa BPK Edisi 2 Vol. VI - Februari 2023</p>
-                                    <h1><a href="artikel/2-artikel.html" class="text-black hover:text-red-500 duration-300 font-bold text-2xl">UU HKPD Sebagai Mesin Bagi Pemerintah Daerah Untuk Berakselerasi</a></h1>
-                                    <ul class="job-info mt-3 flex flex-col md:flex-row">
-                                        <li class="text-blue-500 mr-2"><i class="fa-solid fa-tag"></i> Artikel Hukum</li>
-                                        <li class="text-blue-500 mr-2"><i class="fa-regular fa-folder-open"></i> HUKUM ADMINISTRASI NEGARA</li>
-                                    </ul>                                    
-                                </div>
-                            </div>
-                        </div>                                              
-                    </div>
-                    <div class="job-block-two mb-5 hover:drop-shadow-2xl duration-300 scroll-slide-up">
-                        <div class="inner-box bg-white p-4 rounded-lg border-2">
-                            <div class="content flex flex-col md:flex-row items-start">
-                                <span class="company-logo mt-5 ml-3 text-secondary text-4xl">
-                                    <i class="fa-solid fa-book-open"></i>
-                                </span>
-                                <div class="ml-3">
-                                    <p class="mb-2">Warta Pemeriksa BPK Edisi 4 Vol. V - April 2022</p>
-                                    <h1><a href="artikel/3-artikel.html" class="text-black hover:text-red-500 duration-300 font-bold text-2xl">Sadarkah Kita Kalau Kita Sedang Diawasi</a></h1>
-                                    <ul class="job-info mt-3 flex flex-col md:flex-row">
-                                        <li class="text-blue-500 mr-2"><i class="fa-solid fa-tag"></i> Artikel Hukum</li>
-                                        <li class="text-blue-500 mr-2"><i class="fa-regular fa-folder-open"></i> HUKUM UMUM</li>
-                                    </ul>                                    
-                                </div>
-                            </div>
-                        </div>                                              
-                    </div>
-                    <div class="job-block-two mb-5 hover:drop-shadow-2xl duration-300 scroll-slide-up">
-                        <div class="inner-box bg-white p-4 rounded-lg border-2">
-                            <div class="content flex flex-col md:flex-row items-start">
-                                <span class="company-logo mt-5 ml-3 text-secondary text-4xl">
-                                    <i class="fa-solid fa-book-open"></i>
-                                </span>
-                                <div class="ml-3">
-                                    <p class="mb-2">Warta Pemeriksa BPK Edisi 3 Vol. V - Maret 2022</p>
-                                    <h1><a href="artikel/4-artikel.html" class="text-black hover:text-red-500 duration-300 font-bold text-2xl">Menghadapi Gugatan Dengan LHP Yang Berkualitas</a></h1>
-                                    <ul class="job-info mt-3 flex flex-col md:flex-row">
-                                        <li class="text-blue-500 mr-2"><i class="fa-solid fa-tag"></i> Artikel Hukum</li>
-                                        <li class="text-blue-500 mr-2"><i class="fa-regular fa-folder-open"></i> HUKUM ADMINISTRASI NEGARA</li>
-                                    </ul>                                    
-                                </div>
-                            </div>
-                        </div>                                              
-                    </div>
-                    <div class="job-block-two mb-5 hover:drop-shadow-2xl duration-300 scroll-slide-up">
-                        <div class="inner-box bg-white p-4 rounded-lg border-2">
-                            <div class="content flex flex-col md:flex-row items-start">
-                                <span class="company-logo mt-5 ml-3 text-secondary text-4xl">
-                                    <i class="fa-solid fa-book-open"></i>
-                                </span>
-                                <div class="ml-3">
-                                    <p class="mb-2">Warta Pemeriksa BPK Edisi 9 Vol. IV - September 2021</p>
-                                    <h1><a href="artikel/5-artikel.html" class="text-black hover:text-red-500 duration-300 font-bold text-2xl">Bisakah BPK Membentuk BLU?</a></h1>
-                                    <ul class="job-info mt-3 flex flex-col md:flex-row">
-                                        <li class="text-blue-500 mr-2"><i class="fa-solid fa-tag"></i> Artikel Hukum</li>
-                                        <li class="text-blue-500 mr-2"><i class="fa-regular fa-folder-open"></i> HUKUM ADMINISTRASI NEGARA</li>
-                                    </ul>                                    
+                                <div class="ml-3 text-red-500">
+                                    <p class="mb-2">Seluruh informasi yang disediakan dalam Tulisan Hukum adalah bersifat umum dan disediakan untuk tujuan pemberian informasi hukum dan bukan merupakan pendapat instansi.</p>
                                 </div>
                             </div>
                         </div>                                              
                     </div>
                 </div>   
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-1">
+                        <div class="job-block-two mb-4 scroll-slide-up text-justify">
+                            <div class="inner-box p-4 border rounded-lg">
+                                <div class="content">
+                                    <div class="flex items-start space-x-4">
+                                        <span class="mt-1 ml-3 text-xl">
+                                            <i class="fa-solid fa-file-lines fa-2x"></i>
+                                        </span>
+                                        <div class="ml-4">
+                                            <h4 class="text-xl font-semibold hover:text-blue-500 duration-300">
+                                                <a href="#">Reformasi Regulasi Pajak dan Retribusi Daerah dalam Undang-Undang Hubungan Keuangan Pusat dan Daerah serta Implikasinya Terhadap Tata Kelola Keuangan Daerah</a>
+                                            </h4>
+                                            <div class="mt-3">
+                                                <p class="text-gray-500">
+                                                    Salah satu aspek penting dari hubungan antara pemerintah pusat dan daerah terefleksi dalam intergovernmental fiscal relations. Pelimpahan tugas kepada pemerintah daerah dalam otonomi harus disertai dengan pelimpahan keuangan (money follow functions). Salah satu wujud pelaksanaan otonomi daerah adalah adanya otonomi dalam aspek pengelolaan keuangan daerah yang disebut otonomi fiskal atau desentralisasi fiskal. Pelaksanaan desentralisasi fiskal di Indonesia pada era Reformasi secara resmi dimulai sejak 01 Januari 2001. Proses tersebut diawali dengan pengesahan Undang-Undang Nomor 22 Tahun 1999 tentang Pemerintahan Daerah serta Undang-Undang Nomor 25 Tahun 1999 tentang Perimbangan Keuangan Antara Pemerintah Pusat dan Daerah (PKPD). Hingga kini, kedua regulasi tersebut sudah mengalami beberapa kali revisi hingga yang terakhir dengan Undang-Undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah serta Undang-Undang Nomor 33 Tahun 2004 tentang Perimbangan Keuangan antara Pemerintah Pusat dan Pemerintahan Daerah. Namun, pelaksanaan desentralisasi fiskal selama kurang lebih dua dekade dinilai belum optimal. Untuk mengatasi ketimpangan ini, diperlukan kebijakan baru yang berorientasi pada kinerja dan kapasitas daerah dalam peningkatan pelayanan publik. Maka Presiden Republik Indonesia telah menetapkan Undang-Undang Nomor 1 Tahun 2022 tentang Hubungan Keuangan Antara Pemerintah Pusat dan Pemerintah Daerah (UU HKPD) pada tanggal 5 Januari 2022. Undang-Undang ini tidak hanya mencabut Undang-Undang Nomor 33 Tahun 2004 (Undang-Undang Nomor 33 Tahun 2004) tentang Perimbangan Keuangan antara Pemerintah Pusat dan Pemerintah Daerah, tetapi juga mencabut Undang-Undang Nomor 28 Tahun 2009 tentang Pajak dan Retribusi Daerah (UU PDRD). Hadirnya UU HKPD tersebut mengharuskan pemerintah daerah melaksanakan penyesuaian terhadap keuangan daerah yang selama ini didasarkan pada Undang-Undang Nomor 33 Tahun 2004, serta UU PDRD.
+                                                </p>
+                                            </div>
+                                            <ul class="job-info flex space-x-4 text-danger mt-3 text-red-500">
+                                                <li><i class="fa-regular fa-calendar"></i> 28/07/2023</li>
+                                                <li class="ml-4"><i class="fa-solid fa-tag"></i> Tulisan Hukum</li>
+                                            </ul>
+                                            <ul class="job-info mt-4">
+                                                <li><i class="fa-regular fa-building"></i> BPK Perwakilan Provinsi Maluku</li>
+                                                <li class="ml-4 mt-3"><span class="bg-blue-500 text-white font-bold rounded-md p-1">Pajak, Perpajakan</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block-two mb-4 scroll-slide-up text-justify">
+                            <div class="inner-box p-4 border rounded-lg">
+                                <div class="content">
+                                    <div class="flex items-start space-x-4">
+                                        <span class="mt-1 ml-3 text-xl">
+                                            <i class="fa-solid fa-file-lines fa-2x"></i>
+                                        </span>
+                                        <div class="ml-4">
+                                            <h4 class="text-xl font-semibold hover:text-blue-500 duration-300">
+                                                <a href="#">Standar Pelayanan Sebagai Salah Satu Bentuk Transformasi Pelayanan Publik Instansi Pemerintah</a>
+                                            </h4>
+                                            <div class="mt-3">
+                                                <p class="text-gray-500">
+                                                    Seiring dengan perkembangan jaman dan kebutuhan masyarakat atas berbagai layanan yang diberikan oleh setiap instansi pemerintah, transformasi pelayanan publik harus senantiasa dilakukan oleh penyelenggara pelayanan publik. Berdasarkan Pasal 1 angka 1 UU Nomor 25 Tahun 2009, setiap institusi penyelenggara negara, korporasi, lembaga independen yang dibentuk berdasarkan undang-undang untuk kegiatan pelayanan publik, dan badan hukum lain yang dibentuk semata-mata untuk kegiatan pelayanan publik merupakan penyelenggara pelayanan publik. Salah satu kewajiban penyelenggara pelayanan publik sesuai amanat undang-undang dimaksud yaitu menyusun dan menetapkan standar pelayanan.
+                                                </p>
+                                            </div>
+                                            <ul class="job-info flex space-x-4 text-danger mt-3 text-red-500">
+                                                <li><i class="fa-regular fa-calendar"></i> 26/12/2022</li>
+                                                <li class="ml-4"><i class="fa-solid fa-tag"></i> Tulisan Hukum</li>
+                                            </ul>
+                                            <ul class="job-info mt-4">
+                                                <li><i class="fa-regular fa-building"></i> Direktorat Legislasi, Pengembangan, dan Bantuan Hukum</li>
+                                                <li class="ml-4 mt-3"><span class="bg-blue-500 text-white font-bold rounded-md p-1">Pelayanan Publik</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block-two mb-4 scroll-slide-up text-justify">
+                            <div class="inner-box p-4 border rounded-lg">
+                                <div class="content">
+                                    <div class="flex items-start space-x-4">
+                                        <span class="mt-1 ml-3 text-xl">
+                                            <i class="fa-solid fa-file-lines fa-2x"></i>
+                                        </span>
+                                        <div class="ml-4">
+                                            <h4 class="text-xl font-semibold hover:text-blue-500 duration-300">
+                                                <a href="#">Perbandingan Production Sharing Contract (PSC) Cost Recovery dengan PSC Gross Split</a>
+                                            </h4>
+                                            <div class="mt-3">
+                                                <p class="text-gray-500">
+                                                    Minyak dan gas migas (migas) bumi merupakan sumber energi sekaligus komoditas perdagangan yang sangat penting. Terkait dengan hal tersebut, selayaknya sistem perminyakan nasional disempurnakan sehingga investor migas akan lebih bergairah dalam melakukan kegiatan usaha di Indonesia, produksi migas akan bisa ditingkatkan. Pemerintah Indonesia dalam rangka untuk mencapai tujuan sebesar-besarnya kemakmuran rakyat, membuat skema pengelolaan migas yang menguntungkan bagi negara. Production Sharing Contract Agreement (PSC) merupakan suatu metode perjanjian di dalam bisnis yang digunakan dalam bidang migas bumi di Indonesia dalam rangka memperbesar pendapatan negara dari sumber daya alam, serta menarik investor untuk menanamkan modal di Indonesia
+                                                </p>
+                                            </div>
+                                            <ul class="job-info flex space-x-4 text-danger mt-3 text-red-500">
+                                                <li><i class="fa-regular fa-calendar"></i> 17/11/2022</li>
+                                                <li class="ml-4"><i class="fa-solid fa-tag"></i> Tulisan Hukum</li>
+                                            </ul>
+                                            <ul class="job-info mt-4">
+                                                <li><i class="fa-regular fa-building"></i> Direktorat Legislasi, Pengembangan, dan Bantuan Hukum</li>
+                                                <li class="ml-4 mt-3"><span class="bg-blue-500 text-white font-bold rounded-md p-1">Hulu Minyak dan Gas Bumi</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block-two mb-4 scroll-slide-up text-justify">
+                            <div class="inner-box p-4 border rounded-lg">
+                                <div class="content">
+                                    <div class="flex items-start space-x-4">
+                                        <span class="mt-1 ml-3 text-xl">
+                                            <i class="fa-solid fa-file-lines fa-2x"></i>
+                                        </span>
+                                        <div class="ml-4">
+                                            <h4 class="text-xl font-semibold hover:text-blue-500 duration-300">
+                                                <a href="#">Tata Cara Pemeriksaan Penerimaan Negara Bukan Pajak</a>
+                                            </h4>
+                                            <div class="mt-3">
+                                                <p class="text-gray-500">
+                                                    Untuk mengoptimalkan penerimaan negara, meningkatkan pelaksanaan tugas dan fungsi Pemerintah dalam pelayanan, pengaturan, perlindungan masyarakat, kepastian hukum, dan pengelolaan kekayaan negara, termasuk pengelolaan sumber daya alam yang berkesinambungan, ditetapkanlah Undang-Undang Nomor 9 Tahun 2018 tentang Penerimaan Negara Bukan Pajak (UU PNBP) untuk menyempurnakan pengaturan dan pengelolaan PNBP agar lebih profesional, terbuka, serta bertanggung jawab dan berkeadilan. UU PNBP ini merupakan pengganti Undang-Undang Nomor 20 Tahun 1997 tentang Penerimaan Negara Bukan Pajak. Dalam tulisan hukum ini akan dibahas mengenai Tata Cara Pemeriksaan Penerimaan Negara Bukan Pajak berdasarkan Peraturan Pemerintah Nomor 1 Tahun 2021 tentang Tata Cara Pemeriksaan Penerimaan Negara Bukan Pajak (PP Tata Cara Pemeriksaan PNBP)
+                                                </p>
+                                            </div>
+                                            <ul class="job-info flex space-x-4 text-danger mt-3 text-red-500">
+                                                <li><i class="fa-regular fa-calendar"></i> 24/04/2022</li>
+                                                <li class="ml-4"><i class="fa-solid fa-tag"></i> Tulisan Hukum</li>
+                                            </ul>
+                                            <ul class="job-info mt-4">
+                                                <li><i class="fa-regular fa-building"></i> Direktorat Legislasi, Pengembangan, dan Bantuan Hukum</li>
+                                                <li class="ml-4 mt-3"><span class="bg-blue-500 text-white font-bold rounded-md p-1">Pengelolaan Keuangan Negara/Daerah</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-block-two mb-4 scroll-slide-up text-justify">
+                            <div class="inner-box p-4 border rounded-lg">
+                                <div class="content">
+                                    <div class="flex items-start space-x-4">
+                                        <span class="mt-1 ml-3 text-xl">
+                                            <i class="fa-solid fa-file-lines fa-2x"></i>
+                                        </span>
+                                        <div class="ml-4">
+                                            <h4 class="text-xl font-semibold hover:text-blue-500 duration-300">
+                                                <a href="#">Pengelolaan Keuangan Daerah dalam Rangka Penanggulangan Corona Virus Disease (Covid-19)</a>
+                                            </h4>
+                                            <div class="mt-3">
+                                                <p class="text-gray-500">
+                                                    Dalam keadaan darurat Pemerintah Daerah dapat melakukan pengeluaran yang belum tersedia anggarannya, yang selanjutnya diusulkan dalam rancangan perubahan APBD, dan/atau disampaikan dalam Laporan Realisasi Anggaran. Dalam rangka pelaksanaan kebijakan di bidang keuangan, Pemerintah Daerah diberikan kewenangan untuk melakukan pengutamaan penggunaan alokasi anggaran untuk kegiatan tertentu (refocusing), perubahan alokasi, dan penggunaan APBD . Tulisan hukum ini akan membahas mengenai pengelolaan keuangan daerah dalam rangka penanggulangan Corona Virus Disease 2019 (COVID-19).
+                                                </p>
+                                            </div>
+                                            <ul class="job-info flex space-x-4 text-danger mt-3 text-red-500">
+                                                <li><i class="fa-regular fa-calendar"></i> 31/12/2021</li>
+                                                <li class="ml-4"><i class="fa-solid fa-tag"></i> Tulisan Hukum</li>
+                                            </ul>
+                                            <ul class="job-info mt-4">
+                                                <li><i class="fa-regular fa-building"></i> BPK Perwakilan Provinsi Sulawesi Selatan</li>
+                                                <li class="ml-4 mt-3"><span class="bg-blue-500 text-white font-bold rounded-md p-1">Covid-19</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="md:col-span-1 scroll-slide-up">
+                        <div class="job-block-two">
+                            <div class="inner-box p-4 border rounded-lg">
+                                <h4 class="text-xl font-bold mb-4">Tema</h4>
+                                <ul class="divide-y divide-gray-200">
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Covid-19 (20)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pengadaan Barang/Jasa Pemerintah (7)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pertambangan, Mineral dan Energi (7)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pengelolaan Keuangan Negara/Daerah (5)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pendidikan, Kebudayaan (5)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pengelolaan Barang Milik Negara/Daerah (5)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Badan Usaha Milik Negara (BUMN) - Badan Usaha Milik Daerah (BUMD) (5)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pengawasan Internal Pemerintah, Sistem Pengendalian Intern (4)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pajak, Perpajakan (4)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Badan Layanan Umum/BLU (4)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Transportasi (4)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Asuransi, Jaminan Kesehatan (3)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Ibadah, Keagamaan, Haji (3)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Gaji, Tunjangan, Honorarium, Hak Keuangan, Insentif (2)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Bantuan Sosial (2)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Desa, Daerah Tertinggal, Pedesaan (2)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Bank, Perbankan, Lembaga Keuangan (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pelayanan Publik (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Pemilu, Pilkada (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Sistem Pemerintahan Berbasis Elektronik (SPBE) (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Surat Berharga, Obligasi, Saham (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kewarganegaraan, Imigrasi (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kesehatan (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Utang (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Penguatan Sistem Anti Korupsi (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Hulu Minyak dan Gas Bumi (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Prakerja (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kawasan Ekonomi Khusus (KEK) (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kepegawaian, Aparatur Negara (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kependudukan (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kerja Sama Pemerintah dengan Badan Usaha (KPBU) (1)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block text-blue-500 hover:text-blue-600 py-2">
+                                            Kerugian Negara/Daerah (1)
+                                        </a>
+                                    </li>
+                                </ul>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>                                
                 <div class="p-4 flex flex-wrap justify-center items-center rounded-md scroll-slide-up">
                     <nav>
                         <ul class="flex flex-wrap space-x-2 sm:space-x-4">
@@ -675,7 +890,8 @@
                             </li>
                         </ul>
                     </nav>
-                </div>                                                                                
+                </div>
+                                                                                                
             </div>
         </section>
 
