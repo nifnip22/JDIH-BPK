@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../style.css" rel="stylesheet" />
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+	/>
+	<link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet" />
+    <title>Detail Peraturan</title>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+
+        @keyframes slide-up {
+        0% {
+            transform: translateY(15%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .scroll-slide-up {
+            transform: translateY(25%);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .scroll-slide-up-active {
+            animation: slideUp 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .scroll-slide-right {
+            transform: translateX(-25%);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .scroll-slide-right-active {
+            animation: slideRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+        }
+
+        @keyframes slideRight {
+            0% {
+                transform: translateX(-30%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .smooth-underline {
+            position: relative;
+            text-decoration: none;
+            color: #000; /* Ganti warna sesuai keinginan Anda */
+            transition: color 0.3s, padding 0.3s;
+        }
+
+        .smooth-underline:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px; /* Ketebalan garis bawah */
+            background-color: #3b82f6; /* Ganti warna sesuai keinginan Anda */
+            transform: scaleX(0);
+            transform-origin: 0 100%;
+            transition: transform 0.3s;
+        }
+
+        .smooth-underline:hover {
+            color: #0074d9; /* Ganti warna saat dihover sesuai keinginan Anda */
+        }
+
+        .smooth-underline:hover:after {
+            transform: scaleX(1);
+        }
+
+        button {
+            background-color: #e0f0ff;
+        }
+
+        button:hover {
+            background-color: #0080ff;
+            color: white;
+            transition-duration: 300ms;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto">
+        <div class="fixed bottom-10 right-6 z-50">
+            <a href="#" class="drop-shadow-md bg-opacity-10 bg-blue-500 group hover:bg-blue-700 duration-300 py-2 px-3 rounded-full shadow-lg" >
+                <span class="fa fa-angle-up text-blue-600 group-hover:text-white duration-300"></span>
+            </a>
+        </div>
+
+        <!-- Navbar -->
+        <section id="navbar" class="fixed top-0 right-0 left-0 z-10 w-full bg-opacity-50 backdrop-filter backdrop-blur-md">
+            <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
+                <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+                    <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+                        <div class="flex flex-row items-center justify-between p-4">
+                            <a href="../../index.html" ><img src="../../../assets/img/jdih_bpk.png" alt="Logo" class="w-40"></a>
+                            <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+                                <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                                    <path
+                                        x-show="!open"
+                                        fill-rule="evenodd"
+                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                    <path
+                                        x-show="open"
+                                        fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+                            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                <button
+                                    @click="open = !open"
+                                    class="flex flex-row text-gray-900 bg-white-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline relative z-20"
+                                >
+                                    <span>Tentang</span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95"
+                                    class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-10"
+                                >
+                                    <div class="px-2 pt-2 pb-4 lg:ml-0 md:ml-72 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-sitemap"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Struktur Organisasi</p>
+                                                    <p class="text-sm">Penjelasan Struktur Organisasi JDIH</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-regular fa-circle-question"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">FAQ</p>
+                                                    <p class="text-sm">Pertanyaan Lebih Lanjut</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-gavel"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Dasar Hukum</p>
+                                                    <p class="text-sm">Penjelasan Hukum & Pedoman</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Standar Layanan</p>
+                                                    <p class="text-sm">Sertifikat Standar Pelayanan JDIH</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-circle-info"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Tentang JDIH</p>
+                                                    <p class="text-sm">Apa itu JDIH?</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-location-dot fa-lg"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">UJDIH Perwakilan</p>
+                                                    <p class="text-sm">Perwakilan BPK RI</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-timeline"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Sejarah JDIH</p>
+                                                    <p class="text-sm">Sejarah dari JDIH</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                <button
+                                    @click="open = !open"
+                                    class="flex flex-row text-gray-900 bg-white-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                >
+                                    <span>Hukum</span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95"
+                                    class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right z-10"
+                                >
+                                    <div class="px-2 pt-2 pb-4 lg:m-0 md:ml-72 bg-white rounded-md shadow-lg dark-mode:bg-gray-700 z-50">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-file-lines"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Produk Hukum BPK</p>
+                                                    <p class="text-sm">Data Produk Hukum BPK</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-language"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Terjemahan</p>
+                                                    <p class="text-sm">Terjemahan UU ke dalam Bahasa Inggris</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-book-bookmark"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Putusan Pengadilan</p>
+                                                    <p class="text-sm">Data Keputusan dari Lembaga Peradilan</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-circle-nodes"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Rancangan Pembahasan UU</p>
+                                                    <p class="text-sm">Data Rancangan Pembahasan UU</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-book-bookmark"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Monografi Hukum</p>
+                                                    <p class="text-sm">Data Monografi Hukum</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Produk Hukum Lain</p>
+                                                    <p class="text-sm">...</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-book-open"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Artikel Hukum</p>
+                                                    <p class="text-sm">Data Artikel Hukum</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                <button
+                                    @click="open = !open"
+                                    class="flex flex-row text-gray-900 bg-white-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                >
+                                    <span>Informasi Hukum</span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95"
+                                    class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right"
+                                >
+                                    <div class="px-2 pt-2 pb-4 lg:m-0 md:ml-52 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-file-lines"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Tulisan Hukum</p>
+                                                    <p class="text-sm">Data Tulisan Hukum</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-square-poll-vertical"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Infografis</p>
+                                                    <p class="text-sm">Data Infografis</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-newspaper"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Catatan Berita</p>
+                                                    <p class="text-sm">Data Catatan Berita</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-list-ol"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Glosarium</p>
+                                                    <p class="text-sm">Data Glosarium</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-calculator"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Matriks Perbandingan</p>
+                                                    <p class="text-sm">Data Matriks Perbandingan</p>
+                                                </div>
+                                            </a>
+
+                                            <a
+                                                class="flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                                href="#"
+                                            >
+                                                <div class="bg-blue-500 text-white rounded-lg p-3">
+                                                    <i class="fa-solid fa-chart-pie"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="font-semibold">Statistik Produk Hukum</p>
+                                                    <p class="text-sm">Grafik Statistik Produk Hukum</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Berita</a>    
+                        </nav>
+                    </div>
+                </div>
+            </div>       
+        </section>
+    </div>
+        <!-- /Navbar -->
+
+        <!-- Job Detail Section -->
+        <section id="upper-box" class="lg:px-36 pt-32 pb-16" style="background: linear-gradient(to right, #eff6ff, #bbddff);">
+            <div class="container mx-auto p-4 grid gap-4 animate-slide-up">
+                <div class="col-span-2">
+                    <h4 class="text-xl text-start font-medium antialiased tracking-normal mt-6 pb-4 flex flex-wrap gap-4">
+                        <span class="text-red-500 flex items-center">
+                            <i class="fa-regular fa-calendar text-lg mr-2"></i>
+                            26 Desember 2022
+                        </span>
+                        |
+                        <span class="text-red-500 flex items-center">
+                            <i class="fa-solid fa-file-lines text-lg mr-2"></i>
+                            Tulisan Hukum
+                        </span>
+                        |
+                        <span class="text-red-500 flex items-center">
+                            <i class="fa-solid fa-building text-lg mr-2"></i>
+                            Direktorat Legislasi, Pengembangan, dan Bantuan Hukum
+                        </span>
+                    </h4>
+                    <h1 class="text-blue-500 text-3xl text-start font-medium antialiased tracking-normal mt-6">
+                        Standar Pelayanan Sebagai Salah Satu Bentuk Transformasi Pelayanan Publik Instansi Pemerintah
+                    </h1>
+                </div>
+            </div>                        
+        </section>
+        <section id="outer-box" class="lg:px-32 pt-20 pb-16">
+            <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-2 mb-24">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 scroll-slide-up">
+                    <div class="bg-white overflow-x-auto border rounded-lg">
+                        <i class="fa-solid fa-quote-left fa-3x p-4"></i>
+                        <p class="p-4 text-justify">
+                            Seiring dengan perkembangan jaman dan kebutuhan masyarakat atas berbagai layanan yang diberikan oleh setiap instansi pemerintah, transformasi pelayanan publik harus senantiasa dilakukan oleh penyelenggara pelayanan publik. Berdasarkan Pasal 1 angka 1 UU Nomor 25 Tahun 2009, setiap institusi penyelenggara negara, korporasi, lembaga independen yang dibentuk berdasarkan undang-undang untuk kegiatan pelayanan publik, dan badan hukum lain yang dibentuk semata-mata untuk kegiatan pelayanan publik merupakan penyelenggara pelayanan publik. Salah satu kewajiban penyelenggara pelayanan publik sesuai amanat undang-undang dimaksud yaitu menyusun dan menetapkan standar pelayanan.<br>Berdasarkan latar belakang di atas, tulisan hukum ini akan mengangkat permasalahan berupa: <br>1. Apa langkah yang harus dilakukan dalam penyusunan standar pelayanan?<br>2. Bagaimana bentuk partisipasi masyarakat dalam penyusunan standar pelayanan?
+                        </p>
+                        <div class="p-4">
+                            <p class="bg-blue-500 text-white font-bold rounded-md p-1" style="width: fit-content;">Pelayanan Publik</p>
+                        </div>
+                    </div>
+                    <div class="sidebar-column">
+                        <aside class="sidebar">
+                            <div class="sidebar-widget p-5 rounded-lg" style="background-color: #e0f0ff;">
+                                <div class="widget-content">
+                                    <h4 class="widget-title text-2xl">Gambar</h4><hr>
+                                    <div class="widget-content mt-5">
+                                        <ul>
+                                            <li class="mb-2">
+                                                <img src="https://jdih.bpk.go.id/File/Image?id=250470a1-a3e4-4097-930a-a8b165c51c68&jns=5" alt="Gambar Tulisan Hukum" class="w-full h-auto rounded-lg shadow-md">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar-widget p-5 mt-10 rounded-lg" style="background-color: #e0f0ff;">
+                                <!-- Job Overview -->
+                                <h1 class="widget-title text-2xl">File Lampiran</h1>
+                                <div class="widget-content mt-5">
+                                    <ul>
+                                        <li class="mb-2 flex justify-between group text-blue-500">
+                                            <a href="#" class="group-hover:text-blue-600">
+                                                <i class="fa-solid fa-file-pdf"></i> TH Standar Pelayanan.pdf
+                                            </a>
+                                            <span><a href="#" target="_blank"><i class="fa-solid fa-cloud-arrow-down"></i></a></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sidebar-widget p-5 mt-10 rounded-lg" style="background-color: #e0f0ff;">
+                                <!-- Job Overview -->
+                                <h1 class="widget-title text-2xl">Peraturan Terkait</h1>
+                                <div class="widget-content mt-5">
+                                    <ul>
+                                        <li class="mb-4 flex justify-between group text-blue-500">
+                                            <a href="#" class="group-hover:text-blue-600">
+                                                <i class="fa-solid fa-link"></i> UU Nomor 25 Tahun 2009 tentang Pelayanan Publik
+                                            </a>
+                                        </li>
+                                        <li class="mb-4 flex justify-between group text-blue-500">
+                                            <a href="#" class="group-hover:text-blue-600">
+                                                <i class="fa-solid fa-link"></i> PP Nomor 96 Tahun 2012 tentang Pelaksanaan Undang Undang Nomor 25 Tahun 2009 Tentang Pelayanan Publik
+                                            </a>
+                                        </li>
+                                        <li class="mb-4 flex justify-between group text-blue-500">
+                                            <a href="#" class="group-hover:text-blue-600">
+                                                <i class="fa-solid fa-link"></i> Permen PAN-RB Nomor 15 Tahun 2014 tentang Pedoman Standar Pelayanan
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section id="footer" class="bg-slate-200" style="font-family: 'Jost', sans-serif;">
+            <footer class="text-black scroll-slide-up">
+                <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-44 pt-20 pb-10">
+                    <!-- Widgets Section -->
+                    <div class="md:flex md:gap-8">
+                        <!-- About Widget -->
+                        <div class="md:w-1/2 p-6">
+                            <div class="logo mb-6">
+                                <a href="#">
+                                    <img src="../../../assets/img/jdih_bpk.png" alt="Logo">
+                                </a>
+                            </div>
+                            <h1 class="text-2xl font-bold">Hubungi Kami <br><span class="text-blue-500">Sekretariat Website JDIH BPK</span></h1>
+                            <p class="leading-loose mt-5">
+                                Direktorat Utama Pembinaan dan Pengembangan Hukum Pemeriksaan Keuangan Negara
+                                <br>Badan Pemeriksa Keuangan Republik Indonesia
+                                <br>Jalan Jenderal Gatot Subroto 31 Jakarta Pusat 10210
+                                <br>Telp. (021) 25549000 ext. 1521
+                            </p>
+                        </div>
+            
+                        <!-- Links and About Us Widgets -->
+                        <div class="md:w-1/2 p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Links Widget -->
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-4">Tautan</h4>
+                                    <ul class="leading-loose">
+                                        <li class="smooth-underline">
+                                            <a href="https://www.bpk.go.id/" title="Situs Resmi BPK-RI" target="_blank">Website Resmi BPK</a>
+                                        </li>
+                                        <li class="smooth-underline">
+                                            <a href="https://peraturan.bpk.go.id/" title="Database Peraturan BPK-RI" target="_blank">Database Peraturan BPK</a>
+                                        </li>
+                                        <li class="smooth-underline">
+                                            <a href="https://jdihn.go.id/" title="Situs utama BPK-RI" target="_blank">Portal JDIH Nasional</a>
+                                        </li>
+                                    </ul>
+                                </div>
+            
+                                <!-- About Us Widget -->
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-4">Tentang Kami</h4>
+                                    <ul class="leading-loose">
+                                        <li class="smooth-underline"><a href="#">Struktur Organisasi</a></li>
+                                        <li class="smooth-underline"><a href="#">Dasar Hukum</a></li>
+                                        <li class="smooth-underline"><a href="#">Tentang JDIH</a></li>
+                                        <li class="smooth-underline"><a href="#">Sejarah JDIH</a></li>
+                                        <li class="smooth-underline"><a href="#">F. A. Q.</a></li>
+                                        <li class="smooth-underline"><a href="#">Standar Layanan</a></li>
+                                        <li class="smooth-underline"><a href="#">UJDIH Perwakilan</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            
+                <!-- Bottom -->
+                <div class="bg-white py-4">
+                    <div class="container mx-auto px-4 sm:px-4 md:px-16 lg:px-44">
+                        <div class="flex flex-col md:flex-row justify-between items-center">
+                            <div class="copyright-text text-gray-600 mb-4 md:mb-0">&copy; 2023 BPK RI. All Right Reserved.</div>
+                            <div class="space-x-6">
+                                <a href="#"><i class="fab fa-facebook-f hover:text-blue-500 duration-300"></i></a>
+                                <a href="#"><i class="fab fa-x-twitter hover:text-blue-500 duration-300"></i></a>
+                                <a href="#"><i class="fab fa-instagram hover:text-blue-500 duration-300"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in hover:text-blue-500 duration-300"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </section>
+        <!-- /Footer -->
+    </div>
+    <!-- Components -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script>
+        const elementsUp = document.querySelectorAll('.scroll-slide-up');
+        const elementsRight = document.querySelectorAll('.scroll-slide-right');
+
+        const observerUp = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-slide-up-active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const observerRight = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-slide-right-active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        });
+
+        elementsUp.forEach((element) => {
+            observerUp.observe(element);
+        });
+
+        elementsRight.forEach((element) => {
+            observerRight.observe(element);
+        });
+    </script>
+</body>
+</html>
